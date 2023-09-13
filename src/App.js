@@ -55,7 +55,7 @@ function App() {
       >
         Generated Color: {backgroundColor}
       </div>
-      <button onClick={handleGenerateClick}>Generate Random Color</button>
+      <button onClick={handleGenerateClick}>Generate</button>
       <div
         style={{
           display: 'flex',
