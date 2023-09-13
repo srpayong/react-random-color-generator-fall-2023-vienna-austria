@@ -1,28 +1,34 @@
-import randomColor from 'randomcolor';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-export default function App() {
-  const [backgroundColor, setBackgroundColor] = useState(randomColor());
-  const [hue, setHue] = useState(0); // Initialize hue value
-  const [lightness, setLightness] = useState(50); // Initialize lightness value
+function ColorGenerator() {
+  const [hue, setHue] = useState(Math.floor(Math.random() * 360));
+  const [lightness, setLightness] = useState(50);
+
+  const generatedColorText = `Generated Color: hsl(${hue}, 100%, ${lightness}%)`;
 
   const generateRandomColor = () => {
-    const newColor = randomColor({
-      hue: hue,
-      luminosity: 'light', // We use 'light' to control lightness
-    });
-    setBackgroundColor(newColor);
+    const newHue = Math.floor(Math.random() * 360);
+    const newLightness = Math.floor(Math.random() * 101);
+    setHue(newHue);
+    setLightness(newLightness);
+  };
+
+  const handleHueChange = (event) => {
+    setHue(event.target.value);
+  };
+
+  const handleLightnessChange = (event) => {
+    setLightness(event.target.value);
   };
 
   return (
     <div
       style={{
         display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 'thick',
-        flexDirection: 'column',
-        fontFamily: 'monospace',
+        fontFamily: 'verdana',
       }}
     >
       <h1
@@ -38,20 +44,39 @@ export default function App() {
         style={{
           width: '300px',
           height: '300px',
-          borderRadius: '200px',
-          backgroundColor: backgroundColor,
-          borderColor: 'white',
+          borderRadius: '50%',
+          backgroundColor: `hsl(${hue}, 100%, ${lightness}%)`,
           textAlign: 'center',
           fontSize: '20px',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          transition: 'ease-n-out',
+          transition: 'ease-in-out',
         }}
       >
-        Generated color: {backgroundColor}
+        Generated Color: hsl({hue}, 100%, {lightness}%)
         <br />
       </div>
+      <br />
+      <label htmlFor="hueSlider">Hue:</label>
+      <input
+        id="hueSlider"
+        type="range"
+        min="0"
+        max="359"
+        value={hue}
+        onChange={handleHueChange}
+      />
+      <br />
+      <label htmlFor="lightnessSlider">Lightness:</label>
+      <input
+        id="lightnessSlider"
+        type="range"
+        min="0"
+        max="100"
+        value={lightness}
+        onChange={handleLightnessChange}
+      />
       <br />
       <button
         style={{
@@ -62,59 +87,18 @@ export default function App() {
           height: '8vh',
           borderRadius: '10px',
           fontSize: '20px',
-          background: 'backgroundColor',
+          background: `hsl(${hue}, 100%, ${lightness}%)`,
           color: 'black',
-          borderColor: 'backgroundColor',
+          borderColor: `hsl(${hue}, 100%, ${lightness}%)`,
           borderWidth: '4px',
         }}
         onClick={generateRandomColor}
       >
         Generate
       </button>
-      <br />
-
-      <h2>Hue</h2>
-      <input
-        type="range"
-        min="0"
-        max="360"
-        step="1"
-        value={hue}
-        onChange={(event) => setHue(parseInt(event.target.value))}
-        style={{
-          background: 'white',
-          borderColor: backgroundColor,
-          borderWidth: '3px',
-          width: '15vh',
-          height: '8vh',
-          borderRadius: '20px',
-          textAlign: 'center',
-          fontSize: '20px',
-        }}
-      />
-      <span>{hue}°</span>
-      <br />
-
-      <h2>Lightness</h2>
-      <input
-        type="range"
-        min="0"
-        max="100"
-        step="1"
-        value={lightness}
-        onChange={(event) => setLightness(parseInt(event.target.value))}
-        style={{
-          background: 'white',
-          borderColor: backgroundColor,
-          borderWidth: '3px',
-          width: '15vh',
-          height: '8vh',
-          borderRadius: '20px',
-          textAlign: 'center',
-          fontSize: '20px',
-        }}
-      />
-      <span>{lightness}%</span>
+      {generatedColorText}
     </div>
   );
 }
+
+export default ColorGenerator;
