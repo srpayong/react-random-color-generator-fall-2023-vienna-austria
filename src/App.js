@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 
 function ColorGenerator() {
-  const [hue, setHue] = useState(Math.floor(Math.random() * 360));
-  const [lightness, setLightness] = useState(50);
-
+  const [hue, setHue] = useState(Math.floor(Math.random() * 360).toString());
+  const [lightness, setLightness] = useState('50');
   const generatedColorText = `Generated Color: hsl(${hue}, 100%, ${lightness}%)`;
 
   const generateRandomColor = () => {
-    const newHue = Math.floor(Math.random() * 360);
-    const newLightness = Math.floor(Math.random() * 101);
+    const newHue = Math.floor(Math.random() * 360).toString();
+    const newLightness = Math.floor(Math.random() * 101).toString();
     setHue(newHue);
     setLightness(newLightness);
   };
@@ -45,7 +44,9 @@ function ColorGenerator() {
           width: '300px',
           height: '300px',
           borderRadius: '50%',
-          backgroundColor: `hsl(${hue}, 100%, ${lightness}%)`,
+          backgroundColor: `hsl(${parseInt(hue)}, 100%, ${parseInt(
+            lightness,
+          )}%)`, // Parse values to integers
           textAlign: 'center',
           fontSize: '20px',
           display: 'flex',
@@ -54,7 +55,8 @@ function ColorGenerator() {
           transition: 'ease-in-out',
         }}
       >
-        Generated Color: hsl({hue}, 100%, {lightness}%)
+        Generated Color: hsl({parseInt(hue)}, 100%, {parseInt(lightness)}%){' '}
+        {/* Parse values to integers */}
         <br />
       </div>
       <br />
@@ -87,9 +89,9 @@ function ColorGenerator() {
           height: '8vh',
           borderRadius: '10px',
           fontSize: '20px',
-          background: `hsl(${hue}, 100%, ${lightness}%)`,
+          background: `hsl(${parseInt(hue)}, 100%, ${parseInt(lightness)}%)`,
           color: 'black',
-          borderColor: `hsl(${hue}, 100%, ${lightness}%)`,
+          borderColor: `hsl(${parseInt(hue)}, 100%, ${parseInt(lightness)}%)`,
           borderWidth: '4px',
         }}
         onClick={generateRandomColor}
