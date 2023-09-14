@@ -36,6 +36,9 @@ devDependencies:
   '@types/testing-library__jest-dom':
     specifier: ^5.14.9
     version: 5.14.9
+  '@types/tinycolor2':
+    specifier: ^1.4.4
+    version: 1.4.4
   eslint:
     specifier: ^8.49.0
     version: 8.49.0
@@ -2578,6 +2581,10 @@ packages:
     resolution: {integrity: sha512-FSYhIjFlfOpGSRyVoMBMuS3ws5ehFQODymf3vlI7U1K8c7PHwWwFY7VREfmsuzHSOnoKs/9/Y983ayOs7eRzqw==}
     dependencies:
       '@types/jest': 29.5.4
+    dev: true
+
+  /@types/tinycolor2@1.4.4:
+    resolution: {integrity: sha512-FYK4mlLxUUajo/mblv7EUDHku20qT6ThYNsGZsTHilcHRvIkF8WXqtZO+DVTYkpHWCaAT97LueV59H/5Ve3bGA==}
     dev: true
 
   /@types/trusted-types@2.0.3:
