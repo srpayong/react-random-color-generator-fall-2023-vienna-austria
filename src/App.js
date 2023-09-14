@@ -1,24 +1,20 @@
 import React, { useState } from 'react';
+import tinycolor from 'tinycolor2';
 
 function ColorGenerator() {
-  const [hue, setHue] = useState(Math.floor(Math.random() * 360).toString());
-  const [lightness, setLightness] = useState('50');
-  const generatedColorText = `Generated Color: hsl(${hue}, 100%, ${lightness}%)`;
+  const [hue, setHue] = useState(Math.floor(Math.random() * 360));
+  const [lightness, setLightness] = useState(50);
 
   const generateRandomColor = () => {
-    const newHue = Math.floor(Math.random() * 360).toString();
-    const newLightness = Math.floor(Math.random() * 101).toString();
+    const newHue = Math.floor(Math.random() * 360);
+    const newLightness = Math.floor(Math.random() * 101);
+
     setHue(newHue);
     setLightness(newLightness);
   };
 
-  const handleHueChange = (event) => {
-    setHue(event.target.value);
-  };
-
-  const handleLightnessChange = (event) => {
-    setLightness(event.target.value);
-  };
+  const generatedColor = tinycolor({ h: hue, s: 100, l: lightness });
+  const hexColor = generatedColor.toHexString();
 
   return (
     <div
@@ -44,19 +40,17 @@ function ColorGenerator() {
           width: '300px',
           height: '300px',
           borderRadius: '50%',
-          backgroundColor: `hsl(${parseInt(hue)}, 100%, ${parseInt(
-            lightness,
-          )}%)`, // Parse values to integers
+          backgroundColor: hexColor,
           textAlign: 'center',
           fontSize: '20px',
+          fontFamily: 'papyrus',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          transition: 'ease-in-out',
+          transition: 'ease',
         }}
       >
-        Generated Color: hsl({parseInt(hue)}, 100%, {parseInt(lightness)}%){' '}
-        {/* Parse values to integers */}
+        Generated Color: {hexColor}
         <br />
       </div>
       <br />
@@ -67,7 +61,7 @@ function ColorGenerator() {
         min="0"
         max="359"
         value={hue}
-        onChange={handleHueChange}
+        onChange={(e) => setHue(parseInt(e.target.value))}
       />
       <br />
       <label htmlFor="lightnessSlider">Lightness:</label>
@@ -77,7 +71,7 @@ function ColorGenerator() {
         min="0"
         max="100"
         value={lightness}
-        onChange={handleLightnessChange}
+        onChange={(e) => setLightness(parseInt(e.target.value))}
       />
       <br />
       <button
@@ -89,16 +83,15 @@ function ColorGenerator() {
           height: '8vh',
           borderRadius: '10px',
           fontSize: '20px',
-          background: `hsl(${parseInt(hue)}, 100%, ${parseInt(lightness)}%)`,
+          background: hexColor,
           color: 'black',
-          borderColor: `hsl(${parseInt(hue)}, 100%, ${parseInt(lightness)}%)`,
+          borderColor: hexColor,
           borderWidth: '4px',
         }}
         onClick={generateRandomColor}
       >
         Generate
       </button>
-      {generatedColorText}
     </div>
   );
 }
