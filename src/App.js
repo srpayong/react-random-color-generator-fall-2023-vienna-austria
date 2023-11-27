@@ -28,8 +28,9 @@ function ColorGenerator() {
     >
       <h1
         style={{
-          color: 'honeydew',
-          fontFamily: 'chalkduster',
+          color: 'darkblue',
+          fontSize: '30px',
+          fontFamily: 'monospace',
           textDecoration: 'underline dotted',
         }}
       >
@@ -83,9 +84,10 @@ function ColorGenerator() {
           height: '8vh',
           borderRadius: '10px',
           fontSize: '20px',
+          fontFamily: 'andale',
           background: hexColor,
           color: 'black',
-          borderColor: hexColor,
+          borderColor: 'white',
           borderWidth: '4px',
         }}
         onClick={generateRandomColor}
